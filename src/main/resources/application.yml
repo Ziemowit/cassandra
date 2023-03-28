@@ -1,4 +1,9 @@
+server:
+  error:
+    include-binding-errors: on_param
+
 spring:
 
   application:
     name: 'cassandra'
+

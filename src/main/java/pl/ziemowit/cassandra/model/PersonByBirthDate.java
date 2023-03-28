@@ -12,15 +12,15 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
-@Table("person_by_city")
-public class PersonByCity implements Person {
+@Table("person_by_birth_date")
+public class PersonByBirthDate implements Person {
 
   @PrimaryKey
-  private final PersonByCityKey key;
+  private final PersonByBirthDateKey key;
 
   private String firstName;
   private String lastName;
-  private LocalDate birthDate;
+  private String city;
 
   @Override
   public String getEmail() {
@@ -28,7 +28,7 @@ public class PersonByCity implements Person {
   }
 
   @Override
-  public String getCity() {
-    return key.city();
+  public LocalDate getBirthDate() {
+    return key.birthDate();
   }
 }

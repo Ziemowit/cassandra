@@ -1,6 +1,6 @@
 package pl.ziemowit.cassandra.repo;
 
-import pl.ziemowit.cassandra.model.PersonByCity;
+import pl.ziemowit.cassandra.model.Person;
 
 import java.time.LocalDate;
 
@@ -10,9 +10,9 @@ public record PersonResponseDTO(String email,
                                 String lastName,
                                 LocalDate birthDate) {
 
-  public static PersonResponseDTO from(PersonByCity person) {
-    return new PersonResponseDTO(person.getKey().email(),
-                                 person.getKey().city(),
+  public static PersonResponseDTO from(Person person) {
+    return new PersonResponseDTO(person.getEmail(),
+                                 person.getCity(),
                                  person.getFirstName(),
                                  person.getLastName(),
                                  person.getBirthDate());
