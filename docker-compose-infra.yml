@@ -1,0 +1,22 @@
+version: '3.9'
+
+#networks:
+#  default:
+#    driver: bridge
+#    name: cassandra-network
+
+volumes:
+  cassandra-database:
+
+services:
+  cassandra:
+    image: cassandra:4.1.1
+    container_name: cassandra
+    restart: always
+    network_mode: "host"
+    deploy:
+      replicas: 1
+    volumes:
+      - type: volume
+        source: cassandra-database
+        target: /var/lib/cassandra

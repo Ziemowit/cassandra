@@ -1,0 +1,10 @@
+spring:
+
+  application:
+    name: 'cassandra'
+
+  cassandra:
+    keyspace-name: 'pez'
+    contact-points: 'localhost'
+    local-datacenter: 'datacenter1'
+    schema-action: recreate
