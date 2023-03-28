@@ -1,18 +1,18 @@
 # 1. ACID
 
-a) Atomicity 
+**a) Atomicity** 
 
 Transaction is treated as a single "unit", which either succeeds completely or fails completely
 
-b) Consistency
+**b) Consistency**
 
 Consistency ensures that a transaction can only bring the database from one consistent state to another.
 
-c) Isolation
+**c) Isolation**
 
 Ensures that concurrent execution of transactions leaves the database in the same state that would have been obtained if the transactions were executed sequentially.
 
-d) Durability
+**d) Durability**
 
 Durability guarantees that once a transaction has been committed, it will remain committed even in the case of a system failure/crash.
 
@@ -59,3 +59,23 @@ PARTITION KEY => hashing_function(key) => check_hash_range(hash) => apply_to_nod
 
 * By default, 10% od read query with consistency < ALL performs read repair in the background
 * Setting is per Table
+
+## 3.5 Keyspace
+
+* Top level namespace/container - similar to relational database schema
+
+```cassandraql
+CREATE KEYSPACE my_keyspace
+    WITH REPLICATION = {
+        'class': 'SimpleStrategy',
+        'replication_factor': 1
+        }
+```
+
+### 3.6 Basic datatypes
+
+* text
+* int
+* timestamp
+* uuid / genreated via uuid()
+* timeuuid / sortable, generated via now()
