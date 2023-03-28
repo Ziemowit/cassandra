@@ -5,7 +5,7 @@ import pl.ziemowit.cassandra.model.PersonByCity;
 import pl.ziemowit.cassandra.model.PersonByCityKey;
 import reactor.core.publisher.Flux;
 
-public interface PersonByCityRepo extends ReactiveCassandraRepository<PersonByCity, PersonByCityKey> {
+public interface PersonByCityRepo extends ReactiveCassandraRepository<PersonByCity, PersonByCityKey>, PersonByCityRepoCustom {
 
   Flux<PersonByCity> findByKeyCity(String city);
 

@@ -12,6 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -28,8 +29,14 @@ public class PersonService {
                             .map(PersonResponseDTO::from);
   }
 
-  public Flux<PersonByCity> findByCity(String city) {
-    return personByCityRepo.findByKeyCity(city);
+  public Flux<PersonByCity> findByCityAndEmail(String city, String email) {
+    return Objects.isNull(email)
+        ? personByCityRepo.findByKeyCity(city)
+        : personByCityRepo.findByCityAndEmail(city, email);
+  }
+
+  public Flux<PersonByCity> findByCityAllowFiltering(String city, String firstName, String lastName) {
+    return personByCityRepo.personByFilter(city, firstName, lastName);
   }
 
   public Flux<PersonByBirthDate> findByBirthDate(LocalDate birthDate) {

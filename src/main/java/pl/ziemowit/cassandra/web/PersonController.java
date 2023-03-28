@@ -1,5 +1,6 @@
 package pl.ziemowit.cassandra.web;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -32,9 +33,19 @@ public class PersonController {
   }
 
   @GetMapping("/by-city")
-  public Flux<PersonResponseDTO> findByCity(@RequestParam("city") @NotBlank String city) {
-    log.info("[PersonController][findByCity]: city={}", city);
-    return personService.findByCity(city)
+  public Flux<PersonResponseDTO> findByCity(@RequestParam(value = "city") @NotBlank String city,
+                                            @RequestParam(value = "email", required = false) @Nullable String email) {
+    log.info("[PersonController][findByCity]: city={}, email={}", city, email);
+    return personService.findByCityAndEmail(city, email)
+                        .map(PersonResponseDTO::from);
+  }
+
+  @GetMapping("/by-city/allow-filtering")
+  public Flux<PersonResponseDTO> findByCityAllowFiltering(@RequestParam("city") @NotBlank String city,
+                                                          @RequestParam("firstName") @NotBlank String firstName,
+                                                          @RequestParam("lastName") @NotBlank String lastName) {
+    log.info("[PersonController][findByCityAllowFiltering]: city={}", city);
+    return personService.findByCityAllowFiltering(city, firstName, lastName)
                         .map(PersonResponseDTO::from);
   }
 
