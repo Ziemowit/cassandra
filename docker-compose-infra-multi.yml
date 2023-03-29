@@ -1,0 +1,41 @@
+version: '3.9'
+
+networks:
+  cassandra-network:
+    driver: bridge
+    name: 'cassandra-network'
+
+volumes:
+  cassandra-database1:
+  cassandra-database2:
+
+services:
+  cassandra1:
+    image: cassandra:4.1.1
+    container_name: cassandra1
+    restart: always
+    networks:
+      - 'cassandra-network'
+    deploy:
+      replicas: 1
+    volumes:
+      - type: volume
+        source: cassandra-database1
+        target: /var/lib/cassandra
+    environment:
+      CASSANDRA_CLUSTER_NAME: 'cassandra_cluster'
+  cassandra2:
+    image: cassandra:4.1.1
+    container_name: cassandra2
+    restart: always
+    networks:
+      - 'cassandra-network'
+    deploy:
+      replicas: 1
+    volumes:
+      - type: volume
+        source: cassandra-database2
+        target: /var/lib/cassandra
+    environment:
+      CASSANDRA_CLUSTER_NAME: 'cassandra_cluster'
+      CASSANDRA_SEEDS: cassandra1
