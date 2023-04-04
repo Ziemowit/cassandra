@@ -77,5 +77,5 @@ CREATE KEYSPACE my_keyspace
 * text
 * int
 * timestamp
-* uuid / genreated via uuid()
+* uuid / genreated via uuid()`
 * timeuuid / sortable, generated via now()
